@@ -13,6 +13,10 @@ namespace Client
         const int CART_COUNT = 5000;
         const int MAX_CART_ITEMS = 2;
 
+        /// <summary>
+        /// Adds 
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             var cache = GetCache();
@@ -20,7 +24,7 @@ namespace Client
 
             var invokeResponse = cache.Invoke("TotalBackorderedValue",
                                               param: null,
-                                              invocationGrid: "Sample IG");
+                                              invocationGrid: "ShoppingCartIG");
             
             switch (invokeResponse.Result)
             {
@@ -89,10 +93,10 @@ namespace Client
                 }
                 Cart cart = new Cart { Items = items, UserId = userName };
                 
-                var response = cache.AddOrUpdate(cart.UserId, cart);
+                var response = cache.Add(cart.UserId, cart);
 
                 if (response.Result != ServerResult.Added &&
-                    response.Result != ServerResult.Updated)
+                    response.Result != ServerResult.AlreadyExistsError)
                     throw new Exception($"Unexpected result {response.Result} returned from ScaleOut service");
             }
         }
