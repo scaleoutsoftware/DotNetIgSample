@@ -48,7 +48,7 @@ namespace ShoppingCartIG
         /// <param name="key"></param>
         /// <param name="accumulator"></param>
         /// <param name="context"></param>
-        /// <returns></returns>
+        /// <returns>Accumulated value of backordered shopping cart items.</returns>
         public override decimal Evaluate(string key, 
                                          decimal accumulator, 
                                          OperationContext<string, Cart> context)
@@ -79,7 +79,7 @@ namespace ShoppingCartIG
         }
 
         /// <summary>
-        /// Combines result objects from different threads or machines.
+        /// Combines accumulated result objects from different threads or machines.
         /// </summary>
         /// <param name="result1">First result.</param>
         /// <param name="result2">Second result.</param>
