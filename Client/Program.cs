@@ -41,16 +41,16 @@ namespace Client
                     Console.WriteLine($"Cache.Invoke returned unexpected {invokeResponse.Result}");
                     break;
             }
+        }
 
-
-            /// <summary>
-            /// Connects to the ScaleOut service and gets a cache instance
-            /// used to access shopping cart objects.
-            /// </summary>
-            /// <returns>
-            /// A cache of Cart objects, keyed by a string (the User ID).
-            /// </returns>
-            static Cache<string, Cart> GetCache()
+        /// <summary>
+        /// Connects to the ScaleOut service and gets a cache instance
+        /// used to access shopping cart objects.
+        /// </summary>
+        /// <returns>
+        /// A cache of Cart objects, keyed by a string (the User ID).
+        /// </returns>
+        static Cache<string, Cart> GetCache()
         {
             var gridConnection = GridConnection.Connect(SCALEOUT_CONNSTR);
             
@@ -99,7 +99,6 @@ namespace Client
                     response.Result != ServerResult.AlreadyExistsError)
                     throw new Exception($"Unexpected result {response.Result} returned from ScaleOut service");
             }
-        }
         }
     }
 }
