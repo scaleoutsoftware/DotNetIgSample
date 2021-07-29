@@ -8,13 +8,13 @@ This sample solution consists of three projects:
 
 - *ShoppingCartIG*: An Invocation Grid worker project, based on the *igworker* project template that is available in the *Scaleout.Templates* NuGet package. This example worker hosts a [PMI Reduce operation](https://static.scaleoutsoftware.com/docs/dotnet_client/articles/pmi/about/about_pmi.html) that analyzes shopping carts stored in the ScaleOut service.
 
-- *ShoppingCart*: A class library containing the `Cart` class and supporting DTOs, which are stored in the ScaleOut service.
+- *ShoppingCart*: A class library containing the `Cart` data transfer object (DTO) class and supporting types, which are stored in the ScaleOut service.
 
 - *Client*: A command-line client program that loads the ScaleOut service with shopping cart objects and illustrates how to execute a PMI invoke operation against the Invocation Grid.
 
 ## Prerequisites
 
-- One or more hosts running the ScaleOut service using a [ScaleOut StateServer® Pro](https://www.scaleoutsoftware.com/products/stateserver-pro/) or [ScaleOut StreamServer®](https://www.scaleoutsoftware.com/products/streamserver/) license.
+- One or more hosts running the ScaleOut service using a [ScaleOut StateServer® Pro](https://www.scaleoutsoftware.com/products/stateserver-pro/) or [ScaleOut StreamServer®](https://www.scaleoutsoftware.com/products/streamserver/) license
 - .NET 5.0 SDK
 
 ## Running the Sample
