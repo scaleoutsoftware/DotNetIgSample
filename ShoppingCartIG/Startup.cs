@@ -22,10 +22,10 @@ namespace ShoppingCartIG
         public void Configure(GridConnection gridConnection, ILogger logger, byte[] startupParam, string igName)
         {
             // Configure the cache use to access shopping cart objects.
-            var cacheBuilder = new CacheBuilder<string, Cart>("Shopping Carts", gridConnection);
-
-            // For tips on optimizing the cache in IG applications, see:
+            // For tips on optimizing a cache in IG applications, see:
             // https://static.scaleoutsoftware.com/docs/dotnet_client/articles/pmi/using/handler/pmi_performance.html
+
+            var cacheBuilder = new CacheBuilder<string, Cart>("Shopping Carts", gridConnection);
 
             cacheBuilder.SetSerialization(
                                     (cart, stream) => MessagePackSerializer.Serialize(stream, cart),

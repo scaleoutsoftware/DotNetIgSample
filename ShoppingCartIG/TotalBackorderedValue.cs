@@ -16,6 +16,10 @@ namespace ShoppingCartIG
     /// PMI Reduce handler class that finds the total value of backordered
     /// items in user shopping carts, expressed as a decimal.
     /// </summary>
+    /// <remarks>
+    /// For information about Parallel Method Invocation (PMI) handlers, see:
+    /// https://static.scaleoutsoftware.com/docs/dotnet_client/articles/pmi/about/handler_types.html
+    /// </remarks>
     class TotalBackorderedValue : Reduce<string, Cart, decimal>
     {
         readonly ILogger _logger;
@@ -45,16 +49,21 @@ namespace ShoppingCartIG
         /// Evaluates a shopping cart, adding the value of a cart's backordered items
         /// to the accumulated result.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="accumulator"></param>
-        /// <param name="context"></param>
-        /// <returns>Accumulated value of backordered shopping cart items.</returns>
+        /// <param name="key">Key to the shopping cart object in the ScaleOut cache.</param>
+        /// <param name="accumulator">Thread-local accumulated result value.</param>
+        /// <param name="context">
+        /// Context of the invoke operation, such as the cache being used and the operation's
+        /// cancellation token.
+        /// </param>
+        /// <returns>
+        /// Accumulated value of backordered shopping cart items.
+        /// </returns>
         public override decimal Evaluate(string key, 
                                          decimal accumulator, 
                                          OperationContext<string, Cart> context)
         {
             // Use the cache in the PMI context to retrieve the object being evaluated:
-            var readOptions = new ReadOptions(ClientCacheUsage.ReturnCachedReference, GeoServerReadMode.None, context.FastReadVersion);
+            var readOptions = new ReadOptions() { FastReadVersion = context.FastReadVersion };
             var readResponse = context.Cache.Read(key, readOptions);
 
             switch (readResponse.Result)
