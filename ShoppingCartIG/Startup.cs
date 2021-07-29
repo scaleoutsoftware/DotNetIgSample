@@ -31,7 +31,7 @@ namespace ShoppingCartIG
                                     (cart, stream) => MessagePackSerializer.Serialize(stream, cart),
                                     (stream) => MessagePackSerializer.Deserialize<Cart>(stream));
 
-            cacheBuilder.SetClientCache("Random-MaxMemory", 1000, Environment.ProcessorCount);
+            cacheBuilder.SetClientCache("Random-MaxMemory", capacity: 1000, partitionCount: 0);
             cacheBuilder.SetKeystringCacheSize(100_000);
 
             var cache = cacheBuilder.Build();
